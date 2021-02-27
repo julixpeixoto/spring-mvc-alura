@@ -14,9 +14,24 @@
 	</style>
 </head>
 
-<div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between">
+<div th:fragment="logo" class="">
+	<div class="logo-container p-3 d-flex justify-content-between">
 	    <span class="logo">mudi</span>
-	    <span class="mt-3">login</span>
+	    <span class="mt-3">
+	    	<a class="text-light text-decoration-none" href="/login" sec:authorize="!isAuthenticated()">Login</a>
+	    	<a onclick="document.querySelector('#form-login').submit()" class="text-light text-decoration-none" href="#" sec:authorize="isAuthenticated()">Logout</a>
+	    	<form id="form-login" th:action="@{/logout}" method="POST"></form>
+		</span>	
+	</div>
+	<div class="row mb-2" sec:authorize="isAuthenticated()">
+		<div class="col">
+			<nav class="nav">
+				<a class="nav-link" th:href="@{/home}">Home</a>
+				<a class="nav-link" th:href="@{/usuario/pedido}">Meus Pedidos</a>
+				<a class="nav-link" th:href="@{/oferta}">Faça Sua Oferta</a>
+			</nav>
+		</div>
+	</div>
 </div>  
 
 <div th:fragment="titulo(valor)" class="jumbotron mb-0">
